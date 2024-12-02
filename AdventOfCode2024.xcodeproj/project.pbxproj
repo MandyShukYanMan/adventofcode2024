@@ -27,7 +27,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = 486EEE812CFCE563000355E1 /* Sources */;
 			membershipExceptions = (
-				input.txt,
+				day1/input.txt,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
