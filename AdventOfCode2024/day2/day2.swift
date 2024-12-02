@@ -1,13 +1,5 @@
-//
-//  day2.swift
-//  AdventOfCode2024
-//
-//  Created by Mandy Man on 02/12/2024.
-//
-
-
-fileprivate func isSafeAscending(_ numbers: [Int]) -> Bool {
-    for i in 0..<numbers.count - 1 {
+func isSafeAscending(_ numbers: [Int]) -> Bool {
+    for i in 0..<numbers.count-1 {
         let leftNumber = numbers[i]
         let rightNumber = numbers[i + 1]
         if leftNumber >= rightNumber {
@@ -20,7 +12,7 @@ fileprivate func isSafeAscending(_ numbers: [Int]) -> Bool {
     return true
 }
 
-fileprivate func isSafeDescending(_ numbers: [Int]) -> Bool {
+func isSafeDescending(_ numbers: [Int]) -> Bool {
     for i in 0..<numbers.count - 1 {
         let leftNumber = numbers[i]
         let rightNumber = numbers[i + 1]
@@ -40,23 +32,29 @@ func runDay2() throws {
     let fileContents = try String(contentsOfFile: filePath, encoding: .utf8)
     
     let lines = fileContents.split(separator: "\n")
+    
     var safeReport = 0
     var safeReportAfterChange = 0
     
     for line in lines {
-        let numbers = line.split(separator: " ").map {Int($0)!}
+        let numbers = line.split(separator: " ").map{Int($0)!}
         
-        if isSafeAscending(numbers) || isSafeDescending(numbers) {
+        if isSafeAscending(numbers){
             safeReport += 1
             continue
         }
-        for i in 0..<numbers.count {
+        if isSafeDescending(numbers){
+            safeReport += 1
+            continue
+        }
+        for indexOfItemToDrop in 0..<numbers.count {
             var filteredNumbers: [Int] = []
-            for (index, number) in numbers.enumerated() {
-                if index != i {
-                    filteredNumbers.append(number)
+            for indexOfCurrentItem in 0..<numbers.count {
+                if indexOfCurrentItem != indexOfItemToDrop {
+                    filteredNumbers.append(numbers[indexOfCurrentItem])
                 }
             }
+            
             if isSafeAscending(filteredNumbers) || isSafeDescending(filteredNumbers) {
                 safeReportAfterChange += 1
                 break
